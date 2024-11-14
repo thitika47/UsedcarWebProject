@@ -4,11 +4,12 @@
 
     </head>
 <body>
-    <%# Added part %>
+  <%- include('partials/nav') %>
  <table>
    <thead>
      <tr>
         <th>Image</th>
+        
         <th>Type of car</th>
         <th>Brand</th>
         <th>Model</th>
@@ -45,7 +46,7 @@
           <td><%= car.insurance %></td>
           <td><%= car.price %></td>
           <td>
-            <a href="/edit/<%= car.carid %>">edit</a>
+            <a href="/edit/<%= car.carid %>">Edit</a>
             <a href="/delete/<%= car.carid %>" onclick ="return confirm ('Delete this car');"> Delete</a>
           </td>
           

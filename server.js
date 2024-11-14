@@ -231,7 +231,15 @@ app.post('/create',upload.single('image'),(req,res)=>{
 })
 
 //edit car info
-router.get('/edit/:id',(req,res)=>{
+// app.get('/edit/',(req,res)=>{ 
+//     const sql = "SELECT * FROM car "
+//     console.log(`EDIT id `)
+//     dbcon.query(sql,(err,result)=>{
+//         if (err) throw err;
+//     })
+// })
+
+app.get('/edit/:id',(req,res)=>{
     const sql = "SELECT * FROM car WHERE carid =?"
     console.log(`EDIT id = ${req.params.id}`)
     dbcon.query(sql,[req.params.id],(err,result)=>{

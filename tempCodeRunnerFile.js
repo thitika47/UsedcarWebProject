@@ -1,1 +1,7 @@
-rtype,brand,model,mileage,year,description,carcondition,fuel,insurance,price,i
+app.get('/edit/',(req,res)=>{ 
+//     const sql = "SELECT * FROM car "
+//     console.log(`EDIT id `)
+//     dbcon.query(sql,(err,result)=>{
+//         if (err) throw err;
+//     })
+// })
