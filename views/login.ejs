@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ABC USED CAR</title>
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+    </head>
+    
+    <body>
+        <header>
+            <h1>ABC USED CAR</h1>
+            <h3>Login</h3>
+        </header>
+        <nav> 
+            <a href="/">Home</a>
+            <a href="/register">Register</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+            <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+            <!-- <%- include('partials/nav') %> <%# navigation %> -->
+        </nav>  
+        <main>
+            <form>
+                <div>
+                    <input type="text" id="username" name="username" required placeholder="username">
+                </div>
+                <div>
+                    <input type="text" id="password" name="password" required placeholder="password">
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" id="remember-password" name="remember-password">
+                        Remember Password
+                    </label>
+                </div>
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>

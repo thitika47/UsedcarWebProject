@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    margin: 0;
+}
+
+.header {
+    text-align: center;
+    color: #fff;
+}
+
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+}
+
+.team-member {
+    background-color: #2e2e2e;
+    padding: 1em;
+    border-radius: 8px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.team-member img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.name, .email, .id {
+    color: #d4d4d4;
+}

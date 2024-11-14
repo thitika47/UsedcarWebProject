@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/buyProduct.css">
+    <title>ABC USED CAR</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>ABC USED CAR</h1>
+        </div>
+        <h3>Choose Your Favor</h3>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+        <%- include('partials/nav') %>
+            <%# Navigation partial %>
+    </nav>
+
+
+    <main>
+        <section>
+
+            <form>
+                <div>
+                    <label for="lname">Car name:</label><br>
+                    <input type="text" id="lname" name="lname"><br><br>
+                </div>
+
+                <fieldset>
+                    <legend>Car Type</legend>
+                    <input type="checkbox" id="sedan" name="car_type" value="Sedan">
+                    <label for="sedan">Sedan</label>
+
+                    <input type="checkbox" id="suv" name="car_type" value="SUV">
+                    <label for="suv">SUV</label>
+
+                    <input type="checkbox" id="crossover" name="car_type" value="Crossover">
+                    <label for="crossover">Crossover</label>
+
+                    <input type="checkbox" id="other" name="car_type" value="Other">
+                    <label for="other">Other</label><br><br>
+                </fieldset>
+
+                <div>
+                    <label for="year">Year:</label><br>
+                    <input type="number" id="year" name="year" min="1990" max="5000"><br><br>
+                </div>
+
+                <div>
+                    <label for="price">Price:</label><br>
+                    <input type="number" id="price" name="price" min="100000" max="10000000"><br><br>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

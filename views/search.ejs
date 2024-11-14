@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/detail.css">
+    <title>ABC USED CAR</title>
+    <style>
+        .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Black with opacity */
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 800px;
+    }
+    
+    .close-btn {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    
+    /* Image styling */
+    .car-logo {
+        width: 20px;
+        height: auto;
+        margin: 10px;
+    }
+    
+    .car-selection {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .car-label {
+        display: flex;
+        align-items: center;
+    }
+    
+    .car-info {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    /* Layout styling */
+    .form-container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    /* Left section styling */
+    .left-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 40%;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .range-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    /* Divider styling */
+    .divider {
+        width: 1px;
+        background-color: black;
+        margin: 0 20px;
+    }
+    
+    /* Right section styling */
+    .right-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 60%;
+    }
+    
+    .label-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .option-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .radio-label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <h1>ABC USED CAR</h1>
+    </header>
+    <nav>
+        <!-- <%- include('partials/nav') %>
+            <%# navigation %> -->
+        <a href="/">Home</a>
+        <a href="/productManagementAddproduct">Sell car with us</a><br>
+        <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+        <form action="/form-search" method="post">
+            <input type="text" id="search" name="productSearch" placeholder="Search Product">
+            <button type="submit">Search</button>
+        </form>
+        <button type="open"  id="openModal">Advanced Filter</button>
+
+    </nav>
+
+    <!-- <button id="openModal">Open Car Selection</button> -->
+    <!-- Modal structure -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div class="car-selection">
+                <label class="car-label">
+                    <img src="./views/logo/alfa.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span>Alfa Romeo</span>
+                        <input type="radio" name="car" value="Alfa Romeo">
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/astonmartin.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Aston Martin</span>
+                        <input type="radio" name="car" value="Aston Martin"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/audi.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Audi</span>
+                        <input type="radio" name="car" value="Audi"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/bentely.jpg" class="car-logo">Bentley
+                    <div class="car-info">
+                        <span> Bentley</span>
+                        <input type="radio" name="car" value="Audi"> 
+                    </div>
+                </label>
+            </div>
+            <div class="car-selection">
+                <label class="car-label">
+                    <img src="logo/bmw.jpg" class="car-logo"> 
+                    <div class="car-info">
+                        <span> BMW</span>
+                        <input type="radio" name="car" value="BMW">
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/bugatti.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Bugatti</span>
+                        <input type="radio" name="car" value="Bugatti"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/cadillac.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Cadillac</span>
+                        <input type="radio" name="car" value="Cadillac"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/ferrari.png" class="car-logo">
+                    <div class="car-info">
+                        <span> Ferrari</span>
+                        <input type="radio" name="car" value="Ferrari"> 
+                    </div>
+                </label>
+            </div>
+            <div class="car-selection">
+                <label class="car-label">
+                    <img src="logo/ford.jpg" class="car-logo"> 
+                    <div class="car-info">
+                        <span> Ford</span>
+                        <input type="radio" name="car" value="Ford">
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/lamboghini.jpg" class="car-logo"> 
+                    <div class="car-info">
+                        <span> Lamborghini</span>
+                        <input type="radio" name="car" value="Lamborghini"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/land rover.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Land Rover</span>
+                        <input type="radio" name="car" value="Land Rover"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/mclaren.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> McLaren</span>
+                        <input type="radio" name="car" value="McLaren"> 
+                    </div>
+                </label>
+            </div>
+            <div class="car-selection">
+                <label class="car-label">
+                    <img src="logo/mercedes.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Mercedes-Benz</span>
+                        <input type="radio" name="car" value=" Mercedes-Benz"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/masrati.jpg" class="car-logo"> 
+                    <div class="car-info">
+                        <span> Maserati</span>
+                        <input type="radio" name="car" value="Maserati"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/porsche.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Porsche</span>
+                        <input type="radio" name="car" value="Porsche"> 
+                    </div>
+                </label>
+                <label class="car-label">
+                    <img src="logo/roll royce.jpg" class="car-logo">
+                    <div class="car-info">
+                        <span> Rolls-Royce</span>
+                        <input type="radio" name="car" value="Rolls-Royce"> 
+                    </div>
+                </label>
+            </div>
+
+            <div class="form-container">
+                <!-- Left section for Car Type, Year, Price -->
+                <div class="left-section">
+                    <div class="form-group">
+                        <label for="carType">Car type</label>
+                        <select id="carType">
+                            <option value="">Car type :</option>
+                            <!-- Add options here -->
+                        </select>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="yearRange">Year</label>
+                        <div class="range-container">
+                            <span>2014</span>
+                            <input type="range" id="yearRange" min="2014" max="2024">
+                            <span>2024</span>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <select id="price">
+                            <option value="$250,000">$250,000</option>
+                            <!-- Add more price options as needed -->
+                        </select>
+                    </div>
+                </div>
+            
+                <!-- Divider between sections -->
+                <div class="divider"></div>
+            
+                <!-- Right section for Mileage, Insurance, Condition -->
+                <div class="right-section">
+                    <div class="label-group">
+                        <label for="mileage">Mileage</label>
+                        <div class="range-container">
+                            <span>621 Mile (1000 km)</span>
+                            <input type="range" id="mileage" min="621" max="12427">
+                            <span>12427 Mile (20000 km)</span>
+                        </div>
+                    </div>
+            
+                    <div class="label-group">
+                        <label>Insurance (Year)</label>
+                        <div class="option-group">
+                            <label class="radio-label"><input type="radio" name="insurance" value="1"> 1</label>
+                            <label class="radio-label"><input type="radio" name="insurance" value="2"> 2</label>
+                            <label class="radio-label"><input type="radio" name="insurance" value="3"> 3</label>
+                            <label class="radio-label"><input type="radio" name="insurance" value="4"> 4</label>
+                            <label class="radio-label"><input type="radio" name="insurance" value="5"> 5</label>
+                        </div>
+                    </div>
+            
+                    <div class="label-group">
+                        <label>Condition</label>
+                        <div class="option-group">
+                            <label class="radio-label"><input type="radio" name="condition" value="Excellent"> Excellent</label>
+                            <label class="radio-label"><input type="radio" name="condition" value="Good"> Good</label>
+                            <label class="radio-label"><input type="radio" name="condition" value="Fair"> Fair</label>
+                            <label class="radio-label"><input type="radio" name="condition" value="Certified"> Certified Used Car (Optional)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form><button type="submit">Find</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="search"> 
+        <!-- Product 1 -->
+       <div class="product">
+            <div class="product-content">
+                <div class="product-img">
+                    <img src="test1.jpg" alt="Product 1 Image">
+                </div>
+                <div class="product-description">
+                    <p>Description of Product 1 - Features and details go here.</p>
+                </div>
+                <div class="product-btns">
+                    <button type="button" class="buy">Buy</button>
+                </div>
+            </div>
+        </div> 
+
+        <!-- Product 2 -->
+        <div class="product">
+            <div class="product-content">
+                <div class="product-img">
+                    <img src="test1.jpg" alt="Product 2 Image">
+                </div>
+                <div class="product-description">
+                    <p>Description of Product 2 - Features and details go here.</p>
+                </div>
+                <div class="productButton">
+                    <button type="button" class="buy">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get modal element and buttons
+        const modal = document.getElementById("carModal");
+        const openModalBtn = document.getElementById("openModal");
+        const closeModalBtn = document.getElementById("closeModal");
+    
+        // Open modal on button click
+        openModalBtn.addEventListener("click", () => {
+            modal.style.display = "block";
+        });
+    
+        // Close modal on close button click
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+    
+        // Close modal if clicked outside the modal content
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+    
+
+</body>
+</html>

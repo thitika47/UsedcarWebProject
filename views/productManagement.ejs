@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="/css/detail.css">
+    <title>ABC USED CAR</title>
+</head>
+
+<body>
+    <header>
+    <h1>ABC USED CAR</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a> 
+        <a href="/productManagementAddproduct">Add Car</a>
+        <a href="/productManagementHistory">View History</a>
+        <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+        <form action="/form-search" method="get">
+            <input type="text" id="search" name="productSearch" placeholder="Search Product">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+
+    <!-- Product Cards Section -->
+    <section>
+        <h2>Admin Product Management</h2>
+        <button class="add">Add Car</button>
+        <article class="product-card">
+            <img src="mclaren.jpg" alt="McLaren P1 GTR">
+            <h2>McLaren P1 GTR</h2> <!-- Use h2 for article titles -->
+            <div class="actions">
+                <label class="switch">
+                    <input type="checkbox" id="mclaren1">
+                    <span class="onoff"></span>
+                </label>
+                <button class="edit">Edit</button>
+                <button class="verify">Verify</button>
+                <button class="delete">Delete</button>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <img src="pagani.jpg" alt="Pagani Huayra R">
+            <h2>Pagani Huayra R</h2> <!-- Use h2 for article titles -->
+            <div class="actions">
+                <label class="switch">
+                    <input type="checkbox" id="pagani1">
+                    <span class="onoff"></span>
+                </label>
+                <button class="edit">Edit</button>
+                <button class="verify">Verify</button>
+                <button class="delete">Delete</button>
+            </div>
+        </article>
+    </section>
+</body>
+
+
+</html>

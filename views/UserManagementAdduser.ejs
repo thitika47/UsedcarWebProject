@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/detail.css">
+    <title>ABC USED CAR</title>
+</head>
+
+<body>
+    <header>
+        <h1>ABC USED CAR</h1>
+        <h3>Admin Add User</h3>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/productManagement">Product Management</a>
+        <a href="/userManagementOverview">View History</a>
+        <a href="/UserManagementEdit">Edit</a>
+        <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+    </nav>
+    <main>
+        <section>
+
+
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="save">Save</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

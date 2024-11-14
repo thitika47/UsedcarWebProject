@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    </head>
+<body>
+
+  <!-- <div class="header">
+    <h1>ABC Used Car</h1>
+  </div>
+
+  <div class="content">
+    <div class="car-title"><h2>McLaren P1 GTR</h2></div>
+
+    <div class="car-info">
+      <div>
+        <p><strong>2015</strong></p>
+        <p>Year</p>
+      </div>
+      <div>
+        <p><strong>278 Mi</strong></p>
+        <p>Mileage</p>
+      </div>
+      <div>
+        <p><strong>Twin Turbocharged V8</strong></p>
+        <p>Engine</p>
+      </div>
+      <div>
+        <p><strong>Petrol</strong></p>
+        <p>Fuel type</p>
+      </div>
+      <div>
+        <p><strong>$1.5M</strong></p>
+        <p>Price</p>
+      </div>
+    </div>
+
+    <div class="car-images">
+      <img src="car-image1.jpg" alt="McLaren P1 GTR Image 1">
+      <img src="car-image2.jpg" alt="McLaren P1 GTR Image 2">
+    </div>
+
+    <div class="car-description">
+      The McLaren P1, one of only 58 ever built, was designed to commemorate the marque's 1995 victory at the 24 Hours of Le Mans. Unveiled in 2013 as the world's first hybrid hypercar, it showcases McLaren's racing excellence. Designed by Frank Stephenson, the P1 is lighter and more powerful than its street-legal counterpart, with a sleek aerodynamic body, a drag-reducing rear wing, and a "push to pass" energy recovery system. Weighing just 3,280 lbs., it boasts an impressive power-to-weight ratio, allowing it to reach 0-60 mph in under 2.8 seconds and a top speed of 217 mph. Powered by a 3.8-liter twin-turbo V-8 and an electric motor generating 986 hp, the P1 also features a race-tuned suspension, 19-inch alloy wheels, and carbon-fiber accents.
+    </div> -->
+
+
+    <%# Added part %>
+ <table>
+   <thead>
+     <tr>
+        <th>Image</th>
+        <th>CarID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Mileage</th>
+        <th>Year</th>
+        <th>Description</th>
+        <th>Fueltype</th>
+        <th>Insurance</th>
+        <th>Engine</th>
+        <th>Price</th>
+        
+     </tr>
+   </thead>
+   <tbody>
+     <% car.forEach(function(car) { %> <!-- Loop through the results array -->
+       <tr>
+        <td>
+          <% if(car.image){ %>
+              <img src = "/uploads/<%= car.image %>" width = "100" />
+          <% } else{ %>
+            <p>No image</p>
+          <% } %>
+
+        </td>
+          <td><%= car.carid %></td>
+          <td><%= car.brand %></td>
+         
+          <td><%= car.model %></td>
+          <td><%= car.mileage %></td>
+          <td><%= car.year %></td>
+          <td><%= car.description %></td>
+          <td><%= car.fuel %></td>
+          <td><%= car.insurance %></td>
+          <td><%= car.engine %></td>
+          <td><%= car.price %></td>
+          <td>
+            <a href="/edit/<%= car.carid %>">edit</a>
+            <a href="/delete/<%= car.carid %>" onclick ="return confirm ('Delete this car');"> Delete</a>
+          </td>
+          
+       </tr>
+     <% }); %>
+   </tbody>
+ </table>
+
+
+    <textarea class="message-box" placeholder="Message to dealer"></textarea>
+      <button class="cancel-button">Cancel</button>
+      <button class="send-button">Send</button>
+
+  </div>
+
+</body>
+</html>

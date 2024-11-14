@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC USED CAR</title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+</head>
+
+<body>
+    <header>
+        <h1>ABC USED CAR</h1>
+        <h3>Register Account</h3>
+    </header>
+    <nav>
+        <%- include('partials/nav') %>
+            <%# navigation %>
+
+    </nav>
+    <% if (typeof success_msg !=='undefined' ) { %>
+        <p style="color: green;">
+            <%= success_msg %>
+        </p>
+        <% } %>
+            <% if (typeof error_msg !=='undefined' ) { %>
+                <p style="color: red;">
+                    <%= error_msg %>
+                </p>
+                <% } %>
+
+                    <form action="/form-register" method="POST">
+                        <h3>Register</h3>
+                        <label for="fname">First name:</label><br>
+                        <input type="text" id="fname" name="fname" placeholder="Enter your Firstname"><br>
+                        <label for="lname">Last name:</label><br>
+                        <input type="text" id="lname" name="lname" placeholder="Enter your Lastname"><br><br>
+
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" placeholder="Enter your Email"><br>
+                        <label for="username">Username:</label><br>
+                        <input type="text" id="username" name="username" placeholder="Enter your Username"><br>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password" placeholder="Enter your Password"><br><br>
+
+                        <input type="submit" value="Submit">
+                        <a href="/login"> Back </a></li>
+                    </form>
+
+
+</body>
+
+</html>
