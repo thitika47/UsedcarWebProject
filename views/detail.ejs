@@ -9,15 +9,15 @@
    <thead>
      <tr>
         <th>Image</th>
-        <th>CarID</th>
+        <th>Type of car</th>
         <th>Brand</th>
         <th>Model</th>
         <th>Mileage</th>
         <th>Year</th>
         <th>Description</th>
+        <th>Carcondition</th>
         <th>Fueltype</th>
         <th>Insurance</th>
-        <th>Engine</th>
         <th>Price</th>
         
      </tr>
@@ -33,16 +33,16 @@
           <% } %>
 
         </td>
-          <td><%= car.carid %></td>
+          <td><%= car.cartype %></td>
           <td><%= car.brand %></td>
          
           <td><%= car.model %></td>
           <td><%= car.mileage %></td>
           <td><%= car.year %></td>
           <td><%= car.description %></td>
+          <td><%= car.carcondition %></td>
           <td><%= car.fuel %></td>
           <td><%= car.insurance %></td>
-          <td><%= car.engine %></td>
           <td><%= car.price %></td>
           <td>
             <a href="/edit/<%= car.carid %>">edit</a>

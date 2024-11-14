@@ -142,7 +142,7 @@ router.get("/form-search", (req, res) => {
     console.log("Query params:", req.query);
     const model = req.query.search;  
     if (!model) {
-        return res.status(400).send("None input given");
+        return res.redirect('/detail')
     }
     console.log(`Finding car with model: ${model}`);
     
@@ -220,11 +220,11 @@ router.post('/form-login',(req,res)=>{
 
 
 app.post('/create',upload.single('image'),(req,res)=>{
-    const{brand,model,mileage,year,description,fueltype,insurance,engine,price} = req.body
+    const{cartype,brand,model,mileage,year,description,carcondition,fuel,insurance,price} = req.body
     const image =req.file ? req.file.filename : null // Check if file upload then assign filename to image | else null
 
-    const sql = "INSERT INTO Car (brand,model,mileage,year,description,fueltype,insurance,engine,price,image) VALUES (?,?,?,?,?,?,?,?,?,?) "
-    dbcon.query(sql,[brand,model,mileage,year,description,fueltype,insurance,engine,price,image],(err,result)=>{
+    const sql = "INSERT INTO Car (cartype,brand,model,mileage,year,description,carcondition,fuel,insurance,price,image) VALUES (?,?,?,?,?,?,?,?,?,?,?) "
+    dbcon.query(sql,[cartype,brand,model,mileage,year,description,carcondition,fuel,insurance,price,image],(err,result)=>{
         if(err) throw err;
         res.redirect('/')
     })
