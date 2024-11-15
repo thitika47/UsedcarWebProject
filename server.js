@@ -146,7 +146,7 @@ router.get("/form-search", (req, res) => {
     }
     console.log(`Finding car with model: ${model}`);
     
-    const sql = `SELECT Model FROM Car WHERE model = ?`;
+    const sql = `SELECT * FROM Car WHERE model = ?`;
     dbcon.query(sql, [model], (error, results) => {
         if (error) {
             console.error("Database error:", error);
@@ -236,6 +236,8 @@ app.post('/create',upload.single('image'),(req,res)=>{
 //     console.log(`EDIT id `)
 //     dbcon.query(sql,(err,result)=>{
 //         if (err) throw err;
+//         res.redirect('/edit/:carid')
+//         // res.render('edit', { car: result[0] });
 //     })
 // })
 
