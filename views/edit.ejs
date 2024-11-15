@@ -58,17 +58,17 @@
             </div>
 
             <div class="form-group">
-                <label for="description">Condition</label>
+                <label for="description">Description</label>
                 <input type="text" id="description" name="description" value="<%= car.description %>">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="carcondition">Condition</label>
                 <select name="carcondition" id="carcondition">
                     <option value="E" <%= car.carcondition === 'E' ? 'selected' : '' %>>Excellent</option>
                     <option value="G" <%= car.carcondition === 'G' ? 'selected' : '' %>>Good</option>
                     <option value="F" <%= car.carcondition === 'F' ? 'selected' : '' %>>Fair</option>
                 </select>
-            </div>
+            </div> -->
             <!-- <div class="form-group">
                 <label for="carcondition">Condition</label>
                 <select name="carcondition" id="carcondition" >
@@ -80,7 +80,7 @@
 
             <div class="form-group">
                 <label for="fuel">Fuel type</label>
-                <input type="fuel" id="fuel" name="fuel" value="<%= car.fuel %>">
+                <input type="text" id="fuel" name="fuel" value="<%= car.fuel %>">
             </div>
 
             <div class="form-group">

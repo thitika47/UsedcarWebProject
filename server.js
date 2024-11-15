@@ -231,15 +231,6 @@ app.post('/create',upload.single('image'),(req,res)=>{
 })
 
 //edit car info
-// app.get('/edit/',(req,res)=>{ 
-//     const sql = "SELECT * FROM car "
-//     console.log(`EDIT id `)
-//     dbcon.query(sql,(err,result)=>{
-//         if (err) throw err;
-//         res.redirect('/edit/:carid')
-//         // res.render('edit', { car: result[0] });
-//     })
-// })
 
 app.get('/edit/:id',(req,res)=>{
     const sql = "SELECT * FROM car WHERE carid =?"
@@ -250,8 +241,35 @@ app.get('/edit/:id',(req,res)=>{
     })
 })
 
+app.post('/edit/:id'), upload.single('image') ,(req,res)=>{ //car condition HTML issue //not finished
+    const{cartype,brand,model,mileage,year,description,fuel,insurance,price} = req.body
+    const image =req.file ? req.file.filename : req.body.oldImage
 
+    const sql="UPDATE car SET cartype = ? ,brand = ? ,model = ?,mileage = ?,year = ?,description = ?,fuel = ?,insurance = ?,price = ?,image = ? WHERE carid=?";
+    dbcon.query(sql,[cartype,brand,model,mileage,year,description,fuel,insurance,price,image,req.params.id],(err,result)=>{
+        if(err) throw(err);
+        res.redirect('/detail');
+})
+}
 
+app.get('/delete/:id', (req, res) => { //For WEB SERVICE
+    const sql = "DELETE FROM car WHERE carid =?";
+    dbcon.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.redirect('/');
+    });
+})
+router.delete('/delete/:id',(req,res)=>{ //For postman
+    const {carid} = req.params;
+    let sql = `DELETE FROM car WHERE carid =?`;
+    dbcon.query(sql,[carid],(err,results)=>{
+        if(err) throw err;
+        if(results.affectedRows===0){
+            return res.status(404).send({error :"Record not found"})
+        }
+        res.send({message:"Record deleted successfully"})
+    })
+})
 //Connect Databases
 dbcon.connect(err=>{
     if(err) throw err;
