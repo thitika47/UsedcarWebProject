@@ -58,16 +58,16 @@
             <a href="/edit/<%= car.carid %>">Edit</a>
             <a href="/delete/<%= car.carid %>" onclick ="return confirm ('Delete this car');"> Delete</a>
           </td>
-          
+          <textarea class="message-box" placeholder="Message to dealer"></textarea>
+          <button class="cancel-button">Cancel</button>
+          <button class="send-button">Send</button>
        </tr>
      <% }); %>
    </tbody>
  </table>
 
 
-    <textarea class="message-box" placeholder="Message to dealer"></textarea>
-      <button class="cancel-button">Cancel</button>
-      <button class="send-button">Send</button>
+    
 
   </div>
 

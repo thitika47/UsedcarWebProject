@@ -55,6 +55,7 @@ function ifLoggedin(req,res,next){
     next();
 }
 
+
 //Create Sql connection
 dotenv.config()
 var dbcon = mysql.createConnection({
@@ -209,8 +210,8 @@ router.post('/form-register',(req,res)=>{
 
 router.post('/form-login',(req,res)=>{ 
   const{username,password} =req.body;
-  
-  const sql ='SELECT username,password FROM user WHERE username = ?'
+
+  const sql ='SELECT username,password,email FROM user WHERE username = ?' //can't change it * also nav
   dbcon.query(sql,[username],(err,result)=>{
     if(err) throw err;
     console.log(result)
@@ -230,6 +231,36 @@ router.post('/form-login',(req,res)=>{
     }
   })
 });
+
+
+
+// router.post('/form-login', (req, res) => {
+//     const { username, password } = req.body;
+  
+//     const sql = 'SELECT * FROM user WHERE username = ?';
+//     dbcon.query(sql, [username], (err, result) => {
+//       if (err) throw err;
+  
+//       console.log(result); // Check what the query returns
+  
+//       if (result.length > 0) {
+//         const user = result[0];
+  
+//         // Check password: hashed comparison or direct comparison for non-hashed
+//         if (bcrypt.compareSync(password, user.password) || password === user.password) {
+//           req.session.user = user; // Store user information in the session
+//           return res.redirect('/detail');
+//         } else {
+//           console.log("Incorrect password");
+//           res.render('login', { error_msg: 'Incorrect Password' });
+//         }
+//       } else {
+//         console.log("User not found");
+//         res.render('login', { error_msg: 'User not found' });
+//       }
+//     });
+//   });
+
 router.get('/logout',(req,res)=>{
     req.session.destroy();
     res.redirect('/')
@@ -286,7 +317,6 @@ router.delete('/delete/:id',(req,res)=>{ //For postman
             return res.status(404).send({error :"Record not found"})
         }
         res.send({message:"Record deleted successfully"})
-        
     })
 })
 //Connect Databases
