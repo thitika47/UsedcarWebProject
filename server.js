@@ -109,7 +109,7 @@ router.get("/productManagementHistory",isAuthencicated,(req,res)=>{
     const sql = "SELECT * FROM car";
     dbcon.query(sql,(err,results)=>{
         if(err) throw err;
-        console.log(results)
+        
         res.render('productManagementHistory',{
             car: results
         })
