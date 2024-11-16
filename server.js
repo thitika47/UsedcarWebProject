@@ -184,8 +184,8 @@ router.post('/form-register',(req,res)=>{
             res.render('register',{ error_msg: "Email already registered. Please use a different Email"})
         }else{
             const hashedPassword = bcrypt.hashSync(password,10);
-            const insertUserQuery = 'INSERT INTO user (fname,lname,Email,Username,Password) VALUES(?,?,?,?,?)'
-            dbcon.query(insertUserQuery,[fname,lname,email,username,Hashedpassword],(err,result)=>{
+            const insertUserQuery = 'INSERT INTO user (fname,lname,email,username,password) VALUES(?,?,?,?,?)'
+            dbcon.query(insertUserQuery,[fname,lname,email,username,hashedPassword],(err,result)=>{
                 if (err) throw err;
                 res.render('register',{ success_msg: "Registeration succesfully"})
             })
@@ -193,24 +193,25 @@ router.post('/form-register',(req,res)=>{
     })
 });
 
-router.post('/form-login',(req,res)=>{
-  const{email,password} =req.body;
+router.post('/form-login',(req,res)=>{ //ถ้าRegister แล้วloginได้ แต่ถ้าใส่ในdatabasesจะerrorเพราะhashed
+  const{username,password} =req.body;
   
-  const sql ='SELECT email,password FROM user WHERE email = ?'
-  dbcon.query(sql,[email],(err,result)=>{
+  const sql ='SELECT username,password FROM user WHERE username = ?'
+  dbcon.query(sql,[username],(err,result)=>{
     if(err) throw err;
     console.log(result)
     if(result.length>0){
         const user = result[0];
-        if(bcrypt.compareSync(password,user.password)){
+        if(bcrypt.compareSync(password,user.password)|| password ==user.password){//อันแรกจากregis อันสองปิดจุดdatabase
             req.session.user = user;
             return res.redirect('/team');
         }else{
+            console.log("wrong")
             res.render('login',{error_msg:'Incorrect Password'})
-           
         }
     }
      else{
+        console.log("No user")
         res.render('login',{error_msg:'User not found'})
         
     }
@@ -252,22 +253,25 @@ app.post('/edit/:id'), upload.single('image') ,(req,res)=>{ //car condition HTML
 })
 }
 
-app.get('/delete/:id', (req, res) => { //For WEB SERVICE
+router.get('/delete/:id', (req, res) => { //For WEB SERVICE
     const sql = "DELETE FROM car WHERE carid =?";
     dbcon.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/');
+        res.redirect('/detail');
     });
 })
+
+
 router.delete('/delete/:id',(req,res)=>{ //For postman
-    const {carid} = req.params;
-    let sql = `DELETE FROM car WHERE carid =?`;
-    dbcon.query(sql,[carid],(err,results)=>{
+    const {id} = req.params;
+    const sql = `DELETE FROM car WHERE carid =?`;
+    dbcon.query(sql,[id],(err,results)=>{
         if(err) throw err;
         if(results.affectedRows===0){
             return res.status(404).send({error :"Record not found"})
         }
         res.send({message:"Record deleted successfully"})
+        
     })
 })
 //Connect Databases
