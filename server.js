@@ -88,10 +88,6 @@ router.get("/search",(req,res)=>{
     res.render('search',{title :'homepage'})
 })
 
-router.get("/buyProduct",(req,res)=>{
-    console.log("Product history")
-    res.render('buyProduct')
-})
 router.get("/detail",isAuthencicated,(req,res)=>{
     console.log(req.session.user)
     const sql = "SELECT * FROM car";
@@ -110,7 +106,14 @@ router.get("/detail",isAuthencicated,(req,res)=>{
 
 router.get("/productManagementHistory",isAuthencicated,(req,res)=>{
     console.log("Product history")
-    res.render('productManagementHistory')
+    const sql = "SELECT * FROM car";
+    dbcon.query(sql,(err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.render('productManagementHistory',{
+            car: results
+        })
+    })
 })
 router.get("/productManagement",isAuthencicated,(req,res)=>{
     console.log("Product history")

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/detail.css">
+        <!-- <link rel="stylesheet" href="/css/detail.css"> -->
         <title>ABC USED CAR</title>
     </head> 
 
@@ -24,21 +24,21 @@
             </form>
         </nav>
     
-        <!-- Product Cards -->
-        <div class="product">
-            <img src="mclaren.jpg" alt="McLaren P1 GTR">
-            <p>McLaren P1 GTR</p>
-            <div class="actions">
-                <button class="delete" aria-label="Delete McLaren P1 GTR">Delete</button>
+        <!-- History -->
+     <div class="car-list">
+        <% car.forEach(function(car) { %> 
+            <div class="car">
+                <% if(car.image){ %>
+                    <img src = "/uploads/<%= car.image %>" width = "100" />
+                <% } else{ %>
+                  <p>No image</p>
+                <% } %>
+                <p><%= car.Brand +' '+ car.model %></p> 
+                <div class="actions">
+                    <button class="delete" aria-label="Delete <%= car.model %>">Delete</button>
+                </div>
             </div>
-        </div>
-    
-        <div class="produc">
-            <img src="mclaren.jpg" alt="McLaren P1 GTR">
-            <p>McLaren P1 GTR</p>
-            <div class="actions">
-                <button class="delete" aria-label="Delete McLaren P1 GTR">Delete</button>
-            </div>
+        <% }); %>
         </div>
     </body>
 </html>
