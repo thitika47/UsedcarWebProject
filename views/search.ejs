@@ -6,7 +6,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="/css/detail.css"> -->
     <title>ABC USED CAR</title>
     <style>
-        .modal {
+        .model {
         display: none;
         /* Hidden by default */
         position: fixed;
@@ -20,7 +20,7 @@
         /* Black with opacity */
     }
     
-    .modal-content {
+    .model-content {
         background-color: #fff;
         margin: 10% auto;
         padding: 20px;
@@ -139,18 +139,18 @@
             <input type="text" id="search" name="productSearch" placeholder="Search Product">
             <button type="submit">Search</button>
         </form>
-        <button type="open"  id="openModal">Advanced Filter</button>
+        <button type="open"  id="openmodel">Advanced Filter</button>
 
     </nav>
 
-    <!-- <button id="openModal">Open Car Selection</button> -->
-    <!-- Modal structure -->
-    <div id="carModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeModal">&times;</span>
+    <!-- <button id="openmodel">Open Car Selection</button> -->
+    <!-- model structure -->
+    <div id="carmodel" class="model">
+        <div class="model-content">
+            <span class="close-btn" id="closemodel">&times;</span>
             <div class="car-selection">
                 <label class="car-label">
-                    <img src="./views/logo/alfa.jpg" class="car-logo">
+                    <img src="logo/alfa.jpg" class="car-logo">
                     <div class="car-info">
                         <span>Alfa Romeo</span>
                         <input type="radio" name="car" value="Alfa Romeo">
@@ -373,25 +373,25 @@
     </div>
 
     <script>
-        // Get modal element and buttons
-        const modal = document.getElementById("carModal");
-        const openModalBtn = document.getElementById("openModal");
-        const closeModalBtn = document.getElementById("closeModal");
+        // Get model element and buttons
+        const model = document.getElementById("carmodel");
+        const openmodelBtn = document.getElementById("openmodel");
+        const closemodelBtn = document.getElementById("closemodel");
     
-        // Open modal on button click
-        openModalBtn.addEventListener("click", () => {
-            modal.style.display = "block";
+        // Open model on button click
+        openmodelBtn.addEventListener("click", () => {
+            model.style.display = "block";
         });
     
-        // Close modal on close button click
-        closeModalBtn.addEventListener("click", () => {
-            modal.style.display = "none";
+        // Close model on close button click
+        closemodelBtn.addEventListener("click", () => {
+            model.style.display = "none";
         });
     
-        // Close modal if clicked outside the modal content
+        // Close model if clicked outside the model content
         window.addEventListener("click", (event) => {
-            if (event.target === modal) {
-                modal.style.display = "none";
+            if (event.target === model) {
+                model.style.display = "none";
             }
         });
     </script>

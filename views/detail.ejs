@@ -4,6 +4,12 @@
 
     </head>
 <body>
+  <div class="container">
+    <% if (typeof user !== 'undefined') { %>
+        <h1>Hello, <%= user.username %></h1>
+        <p>Email : <%= user.email %></p>
+        <p>Welcome to the home page</p>
+    <% } %>
   <%- include('partials/nav') %>
  <table>
    <thead>

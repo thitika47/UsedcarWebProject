@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
     destination: (req,file,cb)=>{//Where pic got kept
         cb(null, 'public/uploads/');
     },
-    filename:(req,file,cb)=>{//Upload picture this func will change its name into date+name
+    filename:(req,file,cb)=>{//Upload picture this func will change its name into date+.jpg for example
         cb(null,Date.now()+path.extname(file.originalname)) 
     }
 })
@@ -33,12 +33,27 @@ router.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //Static file
 app.use(express.static(path.join(__dirname,'public')))
-
 router.use(session({
     secret: 'nodesecret',
     resave: false,
     saveUninitialized:true
 }))
+
+//Middleware to check if the user is login
+function isAuthencicated(req,res,next){
+    if(req.session.user){
+        return next();
+    }else{
+        res.redirect('/login')
+    }
+}
+
+function ifLoggedin(req,res,next){
+    if(req.session.user){
+        return res.redirect("/")
+    }
+    next();
+}
 
 //Create Sql connection
 dotenv.config()
@@ -54,18 +69,19 @@ router.get("/",(req,res)=>{
     res.render('home',{title :'homepage'})
 })
 
-router.get("/productManagementAddproduct",(req,res)=>{
-    console.log("ProductManagementAddproduct")
-    res.render('productManagementAddproduct',{title :'homepage'})
-})
 router.get("/team",(req,res)=>{
     console.log("TeamPage")
     res.render('team',{title :'About us'})
 })
-router.get("/login",(req,res)=>{
+router.get("/login",ifLoggedin,(req,res)=>{
     console.log("login")
     res.render('login',{title :'homepage'})
 })
+router.get("/register",ifLoggedin,(req,res)=>{
+    console.log("Product history")
+    res.render('register')
+})
+
 router.get("/search",(req,res)=>{
     console.log("search page")
     res.render('search',{title :'homepage'})
@@ -75,8 +91,8 @@ router.get("/buyProduct",(req,res)=>{
     console.log("Product history")
     res.render('buyProduct')
 })
-router.get("/detail",(req,res)=>{
-    console.log("Car detail")
+router.get("/detail",isAuthencicated,(req,res)=>{
+    console.log(req.session.user)
     const sql = "SELECT * FROM car";
 
     dbcon.query(sql,(err,results)=>{
@@ -84,42 +100,40 @@ router.get("/detail",(req,res)=>{
 
         res.render('detail',{
             title:'Detail',
-            car: results
+            car: results,
+            user: req.session.user 
         })
     })
 
 })
 
-router.get("/productManagementHistory",(req,res)=>{
+router.get("/productManagementHistory",isAuthencicated,(req,res)=>{
     console.log("Product history")
     res.render('productManagementHistory')
 })
-router.get("/productManagement",(req,res)=>{
+router.get("/productManagement",isAuthencicated,(req,res)=>{
     console.log("Product history")
     res.render('productManagement')
 })
 
-router.get("/productManagementAddproduct",(req,res)=>{
+router.get("/productManagementAddproduct",isAuthencicated,(req,res)=>{
     console.log("Product history")
     res.render('productManagementAddproduct')
 })
-router.get("/register",(req,res)=>{
-    console.log("Product history")
-    res.render('register')
-})
+
 
 //Admin user only
-router.get("/UserManagementAdduser",(req,res)=>{
+router.get("/UserManagementAdduser",isAuthencicated,(req,res)=>{
     console.log("UserManagementAdduser")
     res.render('UserManagementAdduser')
 })
 
-router.get("/UserManagementEdit",(req,res)=>{
+router.get("/UserManagementEdit",isAuthencicated,(req,res)=>{
     console.log("User Edit")
     res.render('UserManagementEdit')
 })
 
-router.get("/UserManagementOverview",(req,res)=>{
+router.get("/UserManagementOverview",isAuthencicated,(req,res)=>{
     console.log("User Overview")
     res.render('UserManagementOverview')
 })
@@ -128,7 +142,7 @@ router.get("/UserManagementOverview",(req,res)=>{
 
 
 
-router.get("/a",(req,res)=>{
+router.get("/a",(req,res)=>{ //Checked
     const sql = `SELECT * FROM Car`;
     dbcon.query(sql, (err, results) => {
         if (err) {
@@ -193,7 +207,7 @@ router.post('/form-register',(req,res)=>{
     })
 });
 
-router.post('/form-login',(req,res)=>{ //ถ้าRegister แล้วloginได้ แต่ถ้าใส่ในdatabasesจะerrorเพราะhashed
+router.post('/form-login',(req,res)=>{ 
   const{username,password} =req.body;
   
   const sql ='SELECT username,password FROM user WHERE username = ?'
@@ -204,7 +218,7 @@ router.post('/form-login',(req,res)=>{ //ถ้าRegister แล้วloginไ�
         const user = result[0];
         if(bcrypt.compareSync(password,user.password)|| password ==user.password){//อันแรกจากregis อันสองปิดจุดdatabase
             req.session.user = user;
-            return res.redirect('/team');
+            return res.redirect('/detail');
         }else{
             console.log("wrong")
             res.render('login',{error_msg:'Incorrect Password'})
@@ -213,12 +227,13 @@ router.post('/form-login',(req,res)=>{ //ถ้าRegister แล้วloginไ�
      else{
         console.log("No user")
         res.render('login',{error_msg:'User not found'})
-        
     }
-    
   })
 });
-
+router.get('/logout',(req,res)=>{
+    req.session.destroy();
+    res.redirect('/')
+})
 
 app.post('/create',upload.single('image'),(req,res)=>{
     const{cartype,brand,model,mileage,year,description,carcondition,fuel,insurance,price} = req.body
