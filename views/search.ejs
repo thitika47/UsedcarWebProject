@@ -130,8 +130,7 @@
         <h1>ABC USED CAR</h1>
     </header>
     <nav>
-        <!-- <%- include('partials/nav') %>
-            <%# navigation %> -->
+        <%- include('partials/nav') %> <%# navigation %>
         <a href="/">Home</a>
         <a href="/productManagementAddproduct">Sell car with us</a><br>
         <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
@@ -359,6 +358,7 @@
             </div>
         <% }) %>
       </div>
+      <a href="javascript:history.back()">Back</a>
     <script >
         // Get model element and buttons
         const model = document.getElementById("carmodel");

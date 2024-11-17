@@ -67,7 +67,7 @@ var dbcon = mysql.createConnection({
 
 router.get("/",(req,res)=>{
     console.log("Homepage")
-    console.log(req.session.user)
+    
     const sql = "SELECT * FROM user";
     dbcon.query(sql,(err,results)=>{
         if(err) throw err;
@@ -81,7 +81,15 @@ router.get("/",(req,res)=>{
 
 router.get("/team",(req,res)=>{
     console.log("TeamPage")
-    res.render('team',{title :'About us'})
+    console.log(req.session.user)
+    const sql = "SELECT * FROM user";
+    dbcon.query(sql,(err,results)=>{
+        if(err) throw err;
+        
+        res.render('team',{
+            user: req.session.user
+        })
+    })
 })
 router.get("/login",ifLoggedin,(req,res)=>{
     console.log("login")
