@@ -131,9 +131,8 @@
     </header>
     <nav>
         <%- include('partials/nav') %> <%# navigation %>
-        <a href="/">Home</a>
         <a href="/productManagementAddproduct">Sell car with us</a><br>
-        <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+        
         <form action="/form-search" method="post">
             <input type="text" id="search" name="productSearch" placeholder="Search Product">
             <button type="submit">Search</button>
@@ -348,7 +347,7 @@
                         <h4 class="card-title">
                             <a href="/detail/<%= car.carid%>"><%= car.brand +' '+car.model %></a>
                         </h4>
-                        <h5>ราคา <%= car.price%> บาท</h5>
+                        <h5>Price <%= car.price%> $</h5>
                         <p class="card-text"><%= car.description %></p>
                     </div>
                     <div class="productButton">

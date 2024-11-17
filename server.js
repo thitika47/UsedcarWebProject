@@ -95,6 +95,19 @@ router.get("/login",ifLoggedin,(req,res)=>{
     console.log("login")
     res.render('login',{title :'homepage'})
 })
+
+// router.get("/login",ifLoggedin,(req,res)=>{
+//     console.log("login")
+//     const sql = "SELECT * FROM user";
+//     dbcon.query(sql,(err,results)=>{
+//         if(err) throw err;
+        
+//         res.render('team',{
+//             user: req.session.user
+//         })
+//     })
+// })
+
 router.get("/register",ifLoggedin,(req,res)=>{
     console.log("Product history")
     res.render('register')
@@ -205,7 +218,7 @@ router.get("/form-search", (req, res) => {
     console.log("Query params:", req.query);
     const model = req.query.search;  
     if (!model) {
-        return res.redirect('/detail')
+        return res.redirect('/search')
     }
     console.log(`Finding car with model: ${model}`);
     
@@ -224,7 +237,7 @@ router.get("/form-search", (req, res) => {
         } else {
             console.log(`Found car: ${results[0].Model}`);  
         }
-        res.render('detail',{
+        res.render('search',{
             car: results
         })
     });
@@ -267,7 +280,7 @@ router.post('/form-login',(req,res)=>{
         const user = result[0];
         if(bcrypt.compareSync(password,user.password)|| password ==user.password){//อันแรกจากregis อันสองปิดจุดdatabase
             req.session.user = user;
-            return res.redirect('/detail');
+            return res.redirect('/search');
         }else{
             console.log("wrong")
             res.render('login',{error_msg:'Incorrect Password'})
@@ -281,33 +294,6 @@ router.post('/form-login',(req,res)=>{
 });
 
 
-
-// router.post('/form-login', (req, res) => {
-//     const { username, password } = req.body;
-  
-//     const sql = 'SELECT * FROM user WHERE username = ?';
-//     dbcon.query(sql, [username], (err, result) => {
-//       if (err) throw err;
-  
-//       console.log(result); // Check what the query returns
-  
-//       if (result.length > 0) {
-//         const user = result[0];
-  
-//         // Check password: hashed comparison or direct comparison for non-hashed
-//         if (bcrypt.compareSync(password, user.password) || password === user.password) {
-//           req.session.user = user; // Store user information in the session
-//           return res.redirect('/detail');
-//         } else {
-//           console.log("Incorrect password");
-//           res.render('login', { error_msg: 'Incorrect Password' });
-//         }
-//       } else {
-//         console.log("User not found");
-//         res.render('login', { error_msg: 'User not found' });
-//       }
-//     });
-//   });
 
 router.get('/logout',(req,res)=>{
     req.session.destroy();
@@ -343,7 +329,7 @@ router.post('/edit/:id'), upload.single('image') ,(req,res)=>{ //car condition H
     const sql="UPDATE car SET cartype = ? ,brand = ? ,model = ?,mileage = ?,year = ?,description = ?,fuel = ?,insurance = ?,price = ?,image = ? WHERE carid=?";
     dbcon.query(sql,[cartype,brand,model,mileage,year,description,fuel,insurance,price,image,req.params.id],(err,result)=>{
         if(err) throw(err);
-        res.redirect('/detail');
+        res.redirect('/search');
 })
 }
 
@@ -351,7 +337,7 @@ router.get('/delete/:id', (req, res) => { //For WEB SERVICE
     const sql = "DELETE FROM car WHERE carid =?";
     dbcon.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/detail');
+        res.redirect('/search');
     });
 })
 
