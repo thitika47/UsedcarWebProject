@@ -15,7 +15,7 @@
     <nav>
         <%- include('partials/nav') %> <%# Navigation partial %>
         <a href="/productManagementHistory">View History</a>
-        <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+        <a href="javascript:history.back()">Back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
         <form action="/form-search" method="get">
             <input type="text" id="search" name="productSearch" placeholder="Search Product">
             <button type="submit">Search</button>

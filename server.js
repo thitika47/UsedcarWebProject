@@ -139,7 +139,14 @@ router.get("/UserManagementEdit",isAuthencicated,(req,res)=>{
 
 router.get("/UserManagementOverview",isAuthencicated,(req,res)=>{
     console.log("User Overview")
-    res.render('UserManagementOverview')
+    const sql = "SELECT * FROM user";
+    dbcon.query(sql,(err,results)=>{
+        if(err) throw err;
+        
+        res.render('UserManagementOverview',{
+            user: results
+        })
+    })
 })
 
 

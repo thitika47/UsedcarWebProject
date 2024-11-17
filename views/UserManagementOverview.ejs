@@ -18,7 +18,8 @@
     <a href="/productManagement">Product Management</a>
     <a href="/UserManagementAdduser">Add User</a>
     <a href="/UserManagementEdit">Edit User</a>
-    <a href="/">back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
+    
+    <a href="javascript:history.back()">Back</a> <!-- หาพวก syntax ที่กลับไปหน้าเดิม-->
     <form action="/form-search" method="get">
       <input type="text" id="search" name="productSearch" placeholder="Search Product">
       <button type="submit">Search</button>
@@ -33,24 +34,27 @@
           <th>Username</th>
           <th>Password</th>
           <th>Phone Number</th>
-          <th>Status</th>
+          <th>Activate Account</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
+        <% user.forEach(function(user) { %>
         <tr>
-          <td>user1@example.com</td>
-          <td>user1</td>
-          <td>********</td>
-          <td>123-456-7890</td>
+          <td><%= user.email %></td>
+          <td><%= user.username %></td>
+          <td>********</td> 
+          <td><%= user.phonenum %></td>
+          <td>
+            <label class="switch">
+              <button class="edit">Edit</button>
+              <input type="checkbox">
+              <span class="onoff"></span>
+            </label>
+          </td>
           <td><button class="delete">Delete</button></td>
         </tr>
-        <tr>
-          <td>user2@example.com</td>
-          <td>user2</td>
-          <td>********</td>
-          <td>345-456-7890</td>
-          <td><button class="delete">Delete</button></td>
-        </tr>
+        <% }) %>
       </tbody>
     </table>
   </div>
