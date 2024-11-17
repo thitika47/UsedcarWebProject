@@ -24,24 +24,48 @@
 
 
     <section>
-        <h2>Admin Product Management</h2>
-        <button class="add">Add Car</button>
-        <% car.forEach(function(car) { %>
-            <article class="car-card">
-                <img src="<%= car.image %>" alt="<%= car.alt %>">
-                <h2><%= car.title %></h2> <!-- Use h2 for article titles -->
-                <div class="actions">
-                    <label class="switch">
-                        <input type="checkbox" id="<%= car.carid %>">
-                        <span class="onoff"></span>
-                    </label>
-                    <button class="edit">Edit</button>
-                    <button class="verify">Verify</button>
-                    <button class="delete">Delete</button>
-                </div>
-            </article>
-        <% }); %>
+        <table>
+            <thead>
+              <tr>
+                 <th>Image</th>
+                 
+                 <th>CarID</th>
+                 <th>Brand</th>
+                 <th>Model</th>
+
+                 
+              </tr>
+            </thead>
+            <tbody>
+              <% car.forEach(function(car) { %> <!-- Loop through the results array -->
+                <tr>
+                 <td>
+                   <% if(car.image){ %>
+                       <img src = "/uploads/<%= car.image %>" width = "100" />
+                   <% } else{ %>
+                     <p>No image</p>
+                   <% } %>
+         
+                 </td>
+                   <td><%= car.carid %></td>
+                   
+                   <td><%= car.brand %></td>
+                  
+                   <td><%= car.model %></td>
+                   <td>
+                     <a href="/edit/<%= car.carid %>">Edit</a>
+                     <a href="/delete/<%= car.carid %>" onclick ="return confirm ('Delete this car');"> Delete</a>
+                   </td>
+
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
     </section>
+
+
+
+    
 </body>
 
 

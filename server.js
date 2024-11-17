@@ -93,8 +93,17 @@ router.get("/register",ifLoggedin,(req,res)=>{
 })
 
 router.get("/search",(req,res)=>{
-    console.log("search page")
-    res.render('search',{title :'homepage'})
+    const sql = "SELECT * FROM car";
+
+    dbcon.query(sql,(err,results)=>{
+        if(err) throw err;
+
+        res.render('search',{
+            title:'search',
+            car: results,
+            user: req.session.user 
+        })
+    })
 })
 
 router.get("/detail",isAuthencicated,(req,res)=>{
@@ -109,8 +118,16 @@ router.get("/detail",isAuthencicated,(req,res)=>{
             user: req.session.user 
         })
     })
-
 })
+router.get('/detail/:id',isAuthencicated,(req,res)=>{
+    const sql = "SELECT * FROM car WHERE carid =?"
+    console.log(`Detail = ${req.params.id}`)
+    dbcon.query(sql,[req.params.id],(err,result)=>{
+        if (err) throw err;
+        res.render('detail', { car: result[0] });
+    })
+})
+
 router.get("/productManagement",isAuthencicated,(req,res)=>{
     console.log("Product Management")
     const sql = "SELECT * FROM car";

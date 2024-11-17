@@ -340,39 +340,26 @@
     </div>
 
 
-    <div class="search"> 
-        <!-- Product 1 -->
-       <div class="product">
-            <div class="product-content">
-                <div class="product-img">
-                    <img src="test1.jpg" alt="Product 1 Image">
-                </div>
-                <div class="product-description">
-                    <p>Description of Product 1 - Features and details go here.</p>
-                </div>
-                <div class="product-btns">
-                    <button type="button" class="buy">Buy</button>
-                </div>
-            </div>
-        </div> 
-
-        <!-- Product 2 -->
-        <div class="product">
-            <div class="product-content">
-                <div class="product-img">
-                    <img src="test1.jpg" alt="Product 2 Image">
-                </div>
-                <div class="product-description">
-                    <p>Description of Product 2 - Features and details go here.</p>
-                </div>
-                <div class="productButton">
-                    <button type="button" class="buy">Buy</button>
+    <div class="row my-3">
+        <% Object.values(car).forEach(function(car){%>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="/detail/<%= car.carid%>"><img class="card-img-top" src="/uploads/<%= car.image %>" width = "200" alt ="/pic/noimage.jpg" onerror="this.onerror=null; this.src='/pic/noimage.jpg';" /></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="/detail/<%= car.carid%>"><%= car.brand +' '+car.model %></a>
+                        </h4>
+                        <h5>ราคา <%= car.price%> บาท</h5>
+                        <p class="card-text"><%= car.description %></p>
+                    </div>
+                    <div class="productButton">
+                        <button type="button" class="buy">Buy</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <script>
+        <% }) %>
+      </div>
+    <script >
         // Get model element and buttons
         const model = document.getElementById("carmodel");
         const openmodelBtn = document.getElementById("openmodel");

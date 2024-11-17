@@ -11,66 +11,22 @@
         <p>Welcome to the home page</p>
     <% } %>
   <%- include('partials/nav') %>
- <table>
-   <thead>
-     <tr>
-        <th>Image</th>
-        
-        <th>CarID</th>
-        <th>Type of car</th>
 
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Mileage</th>
-        <th>Year</th>
-        <th>Description</th>
-        <th>Carcondition</th>
-        <th>Fueltype</th>
-        <th>Insurance(YRS)</th>
-        <th>Price</th>
-        
-     </tr>
-   </thead>
-   <tbody>
-     <% car.forEach(function(car) { %> <!-- Loop through the results array -->
-       <tr>
-        <td>
-          <% if(car.image){ %>
-              <img src = "/uploads/<%= car.image %>" width = "100" />
-          <% } else{ %>
-            <p>No image</p>
-          <% } %>
-
-        </td>
-          <td><%= car.carid %></td>
-          <td><%= car.cartype %></td>
-          <td><%= car.brand %></td>
-         
-          <td><%= car.model %></td>
-          <td><%= car.mileage %></td>
-          <td><%= car.year %></td>
-          <td><%= car.description %></td>
-          <td><%= car.carcondition %></td>
-          <td><%= car.fuel %></td>
-          <td><%= car.insurance %></td>
-          <td><%= car.price %></td>
-          <td>
-            <a href="/edit/<%= car.carid %>">Edit</a>
-            <a href="/delete/<%= car.carid %>" onclick ="return confirm ('Delete this car');"> Delete</a>
-          </td>
-          <td> <textarea class="message-box" placeholder="Message to dealer"></textarea>
-            <button class="cancel-button">Cancel</button>
-            <button class="send-button">Send</button></td>
-       </tr>
-     <% }); %>
-   </tbody>
- </table>
-
-
-
-    
-
+  <div class="row my-3">
+    <% Object.values(car).forEach(function(car){%>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <a href="/detail/<%= car.carid%>"><img class="card-img-top" src="/uploads/<%= car.image %>" width = "200" alt ="/pic/noimage.jpg" onerror="this.onerror=null; this.src='/pic/noimage.jpg';" /></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="/detail/<%= car.carid%>"><%= car.brand +' '+car.model %></a>
+                    </h4>
+                    <h5>ราคา <%= car.price%> บาท</h5>
+                    <p class="card-text"><%= car.description %></p>
+                </div>
+            </div>
+        </div>
+    <% }) %>
   </div>
-
 </body>
 </html>

@@ -5,7 +5,6 @@
     <li><a href="/team"> Teampage</a></li>
     <!-- Problem can't logout -->
     <% if (typeof user !== 'undefined') { %>
-        <li><a href="/">Home</a></li>
         <li><a href="/logout" class="logout-btn">Logout</a></li>
     <% } else { %>
         <li><a href="/login" class="login-btn">Login</a></li>
