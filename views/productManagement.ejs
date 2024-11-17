@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type="text/css" href="/css/detail.css">
+    <!-- <link rel="stylesheet"  type="text/css" href="/css/detail.css"> -->
     <title>ABC USED CAR</title>
 </head>
 
@@ -22,37 +22,25 @@
         </form>
     </nav>
 
-    <!-- Product Cards Section -->
+
     <section>
         <h2>Admin Product Management</h2>
         <button class="add">Add Car</button>
-        <article class="product-card">
-            <img src="mclaren.jpg" alt="McLaren P1 GTR">
-            <h2>McLaren P1 GTR</h2> <!-- Use h2 for article titles -->
-            <div class="actions">
-                <label class="switch">
-                    <input type="checkbox" id="mclaren1">
-                    <span class="onoff"></span>
-                </label>
-                <button class="edit">Edit</button>
-                <button class="verify">Verify</button>
-                <button class="delete">Delete</button>
-            </div>
-        </article>
-
-        <article class="product-card">
-            <img src="pagani.jpg" alt="Pagani Huayra R">
-            <h2>Pagani Huayra R</h2> <!-- Use h2 for article titles -->
-            <div class="actions">
-                <label class="switch">
-                    <input type="checkbox" id="pagani1">
-                    <span class="onoff"></span>
-                </label>
-                <button class="edit">Edit</button>
-                <button class="verify">Verify</button>
-                <button class="delete">Delete</button>
-            </div>
-        </article>
+        <% car.forEach(function(car) { %>
+            <article class="car-card">
+                <img src="<%= car.image %>" alt="<%= car.alt %>">
+                <h2><%= car.title %></h2> <!-- Use h2 for article titles -->
+                <div class="actions">
+                    <label class="switch">
+                        <input type="checkbox" id="<%= car.carid %>">
+                        <span class="onoff"></span>
+                    </label>
+                    <button class="edit">Edit</button>
+                    <button class="verify">Verify</button>
+                    <button class="delete">Delete</button>
+                </div>
+            </article>
+        <% }); %>
     </section>
 </body>
 

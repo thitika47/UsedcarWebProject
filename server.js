@@ -67,7 +67,16 @@ var dbcon = mysql.createConnection({
 
 router.get("/",(req,res)=>{
     console.log("Homepage")
-    res.render('home',{title :'homepage'})
+    console.log(req.session.user)
+    const sql = "SELECT * FROM user";
+    dbcon.query(sql,(err,results)=>{
+        if(err) throw err;
+
+        res.render('home',{
+            user: req.session.user 
+        })
+    })
+
 })
 
 router.get("/team",(req,res)=>{
@@ -89,7 +98,6 @@ router.get("/search",(req,res)=>{
 })
 
 router.get("/detail",isAuthencicated,(req,res)=>{
-    console.log(req.session.user)
     const sql = "SELECT * FROM car";
 
     dbcon.query(sql,(err,results)=>{
@@ -103,7 +111,19 @@ router.get("/detail",isAuthencicated,(req,res)=>{
     })
 
 })
-
+router.get("/productManagement",isAuthencicated,(req,res)=>{
+    console.log("Product Management")
+    const sql = "SELECT * FROM car";
+    
+    dbcon.query(sql,(err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.render('productManagement',{
+            car: results
+        })
+    })
+})
+//Admin user only
 router.get("/productManagementHistory",isAuthencicated,(req,res)=>{
     console.log("Product history")
     const sql = "SELECT * FROM car";
@@ -115,10 +135,7 @@ router.get("/productManagementHistory",isAuthencicated,(req,res)=>{
         })
     })
 })
-router.get("/productManagement",isAuthencicated,(req,res)=>{
-    console.log("Product history")
-    res.render('productManagement')
-})
+
 
 router.get("/productManagementAddproduct",isAuthencicated,(req,res)=>{
     console.log("Product history")
@@ -126,16 +143,12 @@ router.get("/productManagementAddproduct",isAuthencicated,(req,res)=>{
 })
 
 
-//Admin user only
+
 router.get("/UserManagementAdduser",isAuthencicated,(req,res)=>{
     console.log("UserManagementAdduser")
     res.render('UserManagementAdduser')
 })
 
-router.get("/UserManagementEdit",isAuthencicated,(req,res)=>{
-    console.log("User Edit")
-    res.render('UserManagementEdit')
-})
 
 router.get("/UserManagementOverview",isAuthencicated,(req,res)=>{
     console.log("User Overview")
@@ -276,7 +289,7 @@ router.get('/logout',(req,res)=>{
     res.redirect('/')
 })
 
-app.post('/create',upload.single('image'),(req,res)=>{
+router.post('/create',upload.single('image'),(req,res)=>{
     const{cartype,brand,model,mileage,year,description,carcondition,fuel,insurance,price} = req.body
     const image =req.file ? req.file.filename : null // Check if file upload then assign filename to image | else null
 
@@ -289,7 +302,7 @@ app.post('/create',upload.single('image'),(req,res)=>{
 
 //edit car info
 
-app.get('/edit/:id',(req,res)=>{
+router.get('/edit/:id',(req,res)=>{
     const sql = "SELECT * FROM car WHERE carid =?"
     console.log(`EDIT id = ${req.params.id}`)
     dbcon.query(sql,[req.params.id],(err,result)=>{
@@ -298,7 +311,7 @@ app.get('/edit/:id',(req,res)=>{
     })
 })
 
-app.post('/edit/:id'), upload.single('image') ,(req,res)=>{ //car condition HTML issue //not finished
+router.post('/edit/:id'), upload.single('image') ,(req,res)=>{ //car condition HTML issue //not finished
     const{cartype,brand,model,mileage,year,description,fuel,insurance,price} = req.body
     const image =req.file ? req.file.filename : req.body.oldImage
 
