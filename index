@@ -1,0 +1,163 @@
+/* Layout และโครงสร้างพื้นฐาน */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212; /* โทนพื้นหลังเข้ม */
+    color: #E0E0E0; /* สีตัวอักษรที่อ่านง่าย */
+}
+
+header, footer {
+    background-color: #1F2937; /* สีเข้มสำหรับส่วนหัวและส่วนท้าย */
+    color: #FACC15; /* สีทองเพิ่มความโดดเด่น */
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a, footer a {
+    color: #FACC15;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+header a:hover, footer a:hover {
+    color: #D97706;
+}
+
+/* Container และการจัดตำแหน่ง */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+/* Card */
+.card {
+    background-color: #1E293B; /* สีเทาเข้ม */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #FACC15; /* ไฮไลต์สีทอง */
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: #FACC15;
+    margin-bottom: 1rem;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #E0E0E0;
+}
+
+/* ปุ่ม */
+.button {
+    background-color: #FACC15;
+    color: #1E293B;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #D97706;
+    color: #FFF;
+}
+
+/* Forms */
+form {
+    background-color: #1E293B;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #FACC15;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #2D3748;
+    color: #E0E0E0;
+    font-size: 1rem;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    outline: 2px solid #FACC15;
+}
+
+/* ตาราง (สำหรับ UserManagement) */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.table th, .table td {
+    border: 1px solid #334155;
+    padding: 0.75rem;
+    text-align: left;
+    color: #E0E0E0;
+}
+
+.table th {
+    background-color: #1F2937;
+    color: #FACC15;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #1E293B;
+}
+
+.table tr:hover {
+    background-color: #334155;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #9CA3AF;
+}
